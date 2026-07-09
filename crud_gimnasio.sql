@@ -21,3 +21,15 @@ VALUES
 ('C3', 'Regates', 8, '98765432C'),
 ('C4', 'Resistencia', 15, '98765432C'),
 ('C5', 'Estiramiento', 15, '12345678A');
+
+USE gimnasio;
+UPDATE instructor
+SET correo = 'zidane.coach@gmail.com'
+WHERE dni = '12345678A';
+
+SELECT * FROM instructor;
+
+DELETE FROM socio
+WHERE num_socio = 5;
+
+SELECT * FROM socio;
