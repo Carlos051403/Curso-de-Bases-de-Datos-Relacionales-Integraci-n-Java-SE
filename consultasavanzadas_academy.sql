@@ -26,3 +26,38 @@ SELECT * FROM course WHERE classroom LIKE '_1';
 SELECT * FROM course WHERE classroom LIKE '%1';
 -- encerrar un caracter entre % significa que busque algo que contenga ese caracter sin importar su posición
 SELECT * FROM course WHERE name LIKE '%p%';
+
+-- Consultas de agregación
+
+SELECT classroom FROM course;
+SELECT COUNT(classroom) AS classroom FROM course;
+-- DISTINC sirve para que nos entregue valores sin repetirse
+SELECT COUNT(DISTINCT classroom) AS classrooms FROM course;
+
+-- PARA SUMAS DE CAMPOS NUMERICOS
+SELECT SUM(hours) AS total_horas FROM course;
+SELECT SUM(hours) AS total_horas FROM course WHERE teacher_id = 1;
+
+-- AVG calcula media
+SELECT AVG(hours) AS avg_hours FROM course;
+
+-- MAX T MIN calcula maximo y minimo de numeros
+SELECT MAX(hours) AS max_hours, MIN(hours) AS min_hours FROM course;
+
+-- SUBCONSULTAS
+SELECT * FROM course WHERE hours = 200;
+SELECT * FROM course WHERE hours = (SELECT MAX(hours) FROM course);
+
+SELECT teacher_id, SUM(hours) AS total_hours 
+FROM course
+GROUP BY teacher_id;
+
+-- ESTO ES PARA FILTRAR LOS GROUP BY
+-- normalmente para filtrar se utiliza la clausula de where pero 
+-- where no se puede utilizar con el group by en este caso usaremos HAVING
+-- WHERE cuando es sin GROUP BY
+-- HAVING cuando se usa GROUP BY
+SELECT teacher_id, SUM(hours) AS total_hours 
+FROM course
+GROUP BY teacher_id
+HAVING total_hours > 200;
